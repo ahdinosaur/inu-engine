@@ -1,4 +1,4 @@
-const { html } = require('../')
+const html = require('yo-yo')
 
 // title demo
 module.exports = {

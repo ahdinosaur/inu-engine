@@ -1,7 +1,7 @@
 var test = require('tape')
+var pull = require('pull-stream')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('calling stop() ends actions stream', function (t) {
   var initialModel = {initial: true}

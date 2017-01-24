@@ -1,4 +1,5 @@
-const { html, pull } = require('../')
+const html = require('yo-yo')
+const pull = require('pull-stream')
 const delay = require('pull-delay')
 
 // clock demo

@@ -1,7 +1,8 @@
 var test = require('tape')
+var pull = require('pull-stream')
+var html = require('yo-yo')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('newly created app renders initial state', function (t) {
   var app = {
@@ -12,7 +13,7 @@ test('newly created app renders initial state', function (t) {
       return {model: model}
     },
     view: function (model, dispatch) {
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   var sources = inu.start(app)

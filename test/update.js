@@ -1,7 +1,8 @@
 var test = require('tape')
+var pull = require('pull-stream')
+var html = require('yo-yo')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('models returned by update are emitted by the model stream', function (t) {
   var initialModel = {initial: true}
@@ -15,7 +16,7 @@ test('models returned by update are emitted by the model stream', function (t) {
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   var sources = inu.start(app)
@@ -40,7 +41,7 @@ test('model stream will not emit a model if is a duplicate', function (t) {
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   var sources = inu.start(app)

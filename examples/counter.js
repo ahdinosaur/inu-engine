@@ -1,4 +1,4 @@
-const { html } = require('../')
+const html = require('yo-yo')
 const assign = require('object-assign')
 const keys = require('own-enumerable-keys')
 

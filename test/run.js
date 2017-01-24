@@ -1,7 +1,8 @@
 var test = require('tape')
+var pull = require('pull-stream')
+var html = require('yo-yo')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('returning an effect from update triggers the run function', function (t) {
   var initialModel = {initial: true}
@@ -18,7 +19,7 @@ test('returning an effect from update triggers the run function', function (t) {
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function (effect) {
       t.equal(effect, expectedEffect, 'effect is equivalent to effect object returned in update')
@@ -42,7 +43,7 @@ test('returning an effect from init triggers the run function', function (t) {
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function (effect) {
       t.equal(effect, expectedEffect, 'effect is equivalent to effect object returned in init')
@@ -69,7 +70,7 @@ test('returning an action from effect triggers the update function', function (t
       return {model: model}
     },
     view: function (model, dispatch) {
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function (effect) {
       return pull.values([expectedAction])
@@ -93,7 +94,7 @@ test('returning an action from effect emits actions on the action stream.', func
       return {model: model}
     },
     view: function (model, dispatch) {
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function (effect) {
       return pull.values([expectedAction])
@@ -121,7 +122,7 @@ test('actions stream passed to run emits actions', function (t) {
       return {model: model}
     },
     view: function (model, dispatch) {
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function (effect, sources) {
       const actions = sources.actions

@@ -1,22 +1,24 @@
-const { start, html, pull } = require('../')
+const start = require('../')
+const html = require('yo-yo')
+const pull = require('pull-stream')
 
 const compose = require('./compose')
 
 const main = document.querySelector('.main')
 
-const apps = [
+const engines = [
   require('./title'),
   require('./counter'),
   require('./routing'),
   require('./clock')
 ]
 
-const app = compose(apps)
+const engine = compose(engines)
 
-const streams = start(app)
+const sources = start(engine)
 
 pull(
-  streams.views(),
+  sources.views(),
   pull.drain(function (view) {
     html.update(main, view)
   })

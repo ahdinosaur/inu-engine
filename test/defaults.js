@@ -1,7 +1,7 @@
 var test = require('tape')
+var pull = require('pull-stream')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('defaultInit', function (t) {
   t.plan(1)

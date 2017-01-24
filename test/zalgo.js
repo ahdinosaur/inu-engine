@@ -1,7 +1,8 @@
 const test = require('tape')
 const defer = require('pull-defer')
+const pull = require('pull-stream')
+
 const inu = require('../')
-const pull = inu.pull
 
 test('infinite loop if sync dispatch, model always new, and effect needs to run async', function (t) {
   var i = 0

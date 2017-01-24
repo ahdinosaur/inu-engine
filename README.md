@@ -1,15 +1,15 @@
 <h1 align="center">
   <img
-    alt="Doge, the shiba inu"
-    src="http://i3.kym-cdn.com/photos/images/original/000/581/296/c09.jpg"
+    alt="Follow your dreams"
+    src="./assets/follow_your_dreams.png"
     width="300"
   />
   <br />
-  inu
+  inu-engine
 </h1>
 
 <h4 align="center">
-  :dog2: composable unidirectional user interfaces using <a href="https://pull-stream.github.io">pull streams</a>
+  :dog: :rocket: composable user interface state and effects manager <a href="https://pull-stream.github.io">pull streams</a>
 </h4>
 
 <div align="center">
@@ -18,20 +18,20 @@
     <img src="https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square" alt="stability" />
   </a>
   <!-- npm version -->
-  <a href="https://npmjs.org/package/inu">
-    <img src="https://img.shields.io/npm/v/inu.svg?style=flat-square" alt="npm version" />
+  <a href="https://npmjs.org/package/inu-engine">
+    <img src="https://img.shields.io/npm/v/inu-engine.svg?style=flat-square" alt="npm version" />
   </a>
   <!-- build status -->
-  <a href="https://travis-ci.org/ahdinosaur/inu">
-    <img src="https://img.shields.io/travis/ahdinosaur/inu/master.svg?style=flat-square" alt="build status" />
+  <a href="https://travis-ci.org/ahdinosaur/inu-engine">
+    <img src="https://img.shields.io/travis/ahdinosaur/inu-engine/master.svg?style=flat-square" alt="build status" />
   </a>
   <!-- test coverage -->
-  <a href="https://codecov.io/github/ahdinosaur/inu">
-    <img src="https://img.shields.io/codecov/c/github/ahdinosaur/inu/master.svg?style=flat-square" alt="test coverage" />
+  <a href="https://codecov.io/github/ahdinosaur/inu-engine">
+    <img src="https://img.shields.io/codecov/c/github/ahdinosaur/inu-engine/master.svg?style=flat-square" alt="test coverage" />
   </a>
   <!-- downloads -->
-  <a href="https://npmjs.org/package/inu">
-    <img src="https://img.shields.io/npm/dm/inu.svg?style=flat-square"
+  <a href="https://npmjs.org/package/inu-engine">
+    <img src="https://img.shields.io/npm/dm/inu-engine.svg?style=flat-square"
       alt="Downloads" />
   </a>
   <!-- standard style -->
@@ -53,10 +53,10 @@
 
 ## features
 
-- **minimal size**: `inu` + [`yo-yo`](https://github.com/maxogden/yo-yo) + [`pull-stream`](https://github.com/pull-stream/pull-stream) weighs only ~8kb
-- **app is a data structure**: only need to learn 4 functions, automatically supports plugins
-- [**architecture is fractal**](https://github.com/jarvisaoieong/redux-architecture#redux-architecture): compose one app from many smaller apps
-- [**single source of truth**](http://redux.js.org/docs/introduction/ThreePrinciples.html#single-source-of-truth): the state of your app is a single object tree
+- **minimal size**: `inu-engine` + [`yo-yo`](https://github.com/maxogden/yo-yo) + [`pull-stream`](https://github.com/pull-stream/pull-stream) weighs only ~8kb
+- **engine is a data structure**: only need to learn 4 functions, automatically supports plugins
+- [**architecture is fractal**](https://github.com/jarvisaoieong/redux-architecture#redux-architecture): compose one engine from many smaller engine
+- [**single source of truth**](http://redux.js.org/docs/introduction/ThreePrinciples.html#single-source-of-truth): the state of your engine is a single object tree
 - [**state is read-only**](http://redux.js.org/docs/introduction/ThreePrinciples.html#state-is-read-only): update state by dispatching an action, an object describing what happened
 - [**update with pure functions**](http://redux.js.org/docs/introduction/ThreePrinciples.html#changes-are-made-with-pure-functions): updates are handled by a pure function, no magic
 - **first-class side effects**: initial state or updates can include an effect, an object describing what will happen
@@ -64,26 +64,24 @@
 
 ## demos
 
-- [./examples/clock](./examples/clock.js): simple app to count seconds
-- [./examples/title](./examples/title.js): simple app to change document.title
+- [./examples/clock](./examples/clock.js): simple engine to count seconds
+- [./examples/title](./examples/title.js): simple engine to change document.title
 - [./examples/routing](./examples/routing.js): url routing with [`sheet-router`](https://github.com/yoshuawuyts/sheet-router)
-- [./examples/compose](./examples/compose.js): multiplex many apps into one app
+- [./examples/compose](./examples/compose.js): multiplex many engines into one engine
 - [./examples/counter](./examples/counter.js): simple counter expressed in standard redux pattern
-- [./examples](./examples/index.js): above examples composed into one app deployed at <http://dinosaur.is/inu>.
-- [pietgeursen/ssb-gathering-ui](https://github.com/pietgeursen/ssb-gathering-ui): Facebook-style events using [`inu`](./), [`muxrpc`](https://github.com/ssbc/muxrpc), [`sheetify`](https://github.com/stackcss/sheetify), [`tcomb`](https://github.com/gcanti/tcomb) and other fun stuff.
-- [pietgeursen/inu-fft](https://github.com/pietgeursen/inu-fft): Little inu app with fft of microphone input
-- [ahdinosaur/inu-plays-roguelike](https://github.com/ahdinosaur/inu-plays-roguelike): ['Twitch Plays Pokémon'](https://en.wikipedia.org/wiki/Twitch_Plays_Pok%C3%A9mon)-style ['Roguelike'](https://en.wikipedia.org/wiki/Roguelike) game using [`inu`](https://github.com/ahdinosaur/inu), [`tcomb`](https://github.com/gcanti/tcomb), and things.
-- [holodex/app#compost](https://github.com/holodex/app/tree/compost): full-stack user directory app using [`inu`](./), [`inux`](https://github.com/ahdinosaur/inux), and [`vas`](https://github.com/ahdinosaur/vas).
+- [./examples](./examples/index.js): above examples composed into one engine deployed at <http://dinosaur.is/inu-engine>.
 
-*if you want to share anything using `inu`, add your thing here!*
+*if you want to share anything using `inu-engine`, add your thing here!*
 
 ## example
 
 ```js
-const { start, html, pull } = require('inu')
+const start = require('inu-engine')
+const html = require('yo-yo')
+const pull = require('pull-stream')
 const delay = require('pull-delay')
 
-const app = {
+const engine = {
 
   init: () => ({
     model: 0,
@@ -120,7 +118,7 @@ const app = {
 }
 
 const main = document.querySelector('.main')
-const { views } = start(app)
+const { views } = start(engine)
 
 pull(
   views(),
@@ -130,7 +128,7 @@ pull(
 )
 ```
 
-for a full example of composing multiple apps together, see [source](./examples/index.js) and [demo](https://ahdinosaur.github.io/inu).
+for a full example of composing multiple engines together, see [source](./examples/index.js) and [demo](https://ahdinosaur.github.io/inu-engine).
 
 ## concepts
 
@@ -258,7 +256,7 @@ function appView (model, dispatch) {
 }
 ```
 
-put it all together and we have an `inu` app!
+put it all together and we have an `inu-engine` engine!
 
 ```js
 const app = {
@@ -269,7 +267,7 @@ const app = {
 }
 ```
 
-that's it for `inu`. note that we're only using plain functions and objects. `inu` (and [`inux`](https://github.com/ahdinosaur/inux)) come with a few utilities to facilitate this pattern, but the main idea is that you describe how your state is updated over time in response to action objects, and 90% of the code you write is just plain JavaScript, with no use of `inu` itself, its APIs, or any magic.
+that's it for `inu-engine`. note that we're only using plain functions and objects. `inu-engine` (and [`inu`](https://github.com/ahdinosaur/inu)) come with a few utilities to facilitate this pattern, but the main idea is that you describe how your state is updated over time in response to action objects, and 90% of the code you write is just plain JavaScript, with no use of `inu-engine` itself, its APIs, or any magic.
 
 ([credit @gaearon of `redux` for initial source of this intro](https://www.reddit.com/r/reactjs/comments/4npzq5/confused_redux_or_mobx/d46k2bl))
 
@@ -277,20 +275,20 @@ that's it for `inu`. note that we're only using plain functions and objects. `in
 
 where *state* is an object with a required key `model` and an optional key `effect`,
 
-an `inu` app is defined by an object with the following (optional) keys:
+an `inu-engine` engine is defined by an object with the following (optional) keys:
 
 - `init`: a function returning the initial state
 - `update`: a `update(model, action)` pure function, returns the new state
 - `view`: a `view(model, dispatch)` pure function, returns the user interface declaration
 - `run`: a `run(effect, sources)` function, returns an optional [pull source stream](https://pull-stream.github.io) of future actions
 
-### `inu = require('inu')`
+### `start = require('inu-engine')`
 
-the top-level `inu` module is a grab bag of all `inu/*` modules.
+the top-level `inu-engine` module is a grab bag of all `inu-engine/*` modules.
 
-you can also require each module separately like `require('inu/start')`.
+you can also require each module separately like `require('inu-engine/start')`.
 
-### `sources = inu.start(app)`
+### `sources = start(app)`
 
 sources is an object with the following keys:
 
@@ -301,23 +299,19 @@ sources is an object with the following keys:
 - `effects`: a function that returns a state-ful\* [pull source stream](https://pull-stream.github.io) for effects
 - `effectActionsSources`: a function that returns a [pull source stream](https://pull-stream.github.io) for any sources of next actions caused by effects
 
-![streams flow diagram](https://rawgit.com/ahdinosaur/inu/master/assets/flow-diagram.dot.svg)
+![streams flow diagram](https://rawgit.com/ahdinosaur/inu-engine/master/assets/flow-diagram.dot.svg)
 
 \* in this context, *state-ful* means that the pull source stream will always start with the last value (if any) first.
-
-### [`inu.html === require('yo-yo')`](https://github.com/maxogden/yo-yo) (for templating, virtual DOM "diffing")
-
-### [`inu.pull === require('pull-stream')`](https://pull-stream.github.io) (for async event "piping")
 
 ## install
 
 ```shell
-npm install --save inu
+npm install --save inu-engine
 ```
 
 ## inspiration
 
-- [tom](https://github.com/gcanti/tom): `inu`'s implementation is more or less a direct port of [`tom`](https://github.com/gcanti/tom) using [pull streams](https://pull-stream.github.io) instead of [rx](https://www.npmjs.com/package/rx)
+- [tom](https://github.com/gcanti/tom): `inu-engine`'s implementation is more or less a direct port of [`tom`](https://github.com/gcanti/tom) using [pull streams](https://pull-stream.github.io) instead of [rx](https://www.npmjs.com/package/rx)
 - [redux-architecture](https://github.com/jarvisaoieong/redux-architecture)
 - [elm-architecture-tutorial](https://github.com/evancz/elm-architecture-tutorial)
 - [mercury](https://github.com/Raynos/mercury)
@@ -327,7 +321,7 @@ npm install --save inu
 
 The Apache License
 
-Copyright &copy; 2016 Michael Williams
+Copyright &copy; 2017 Michael Williams
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

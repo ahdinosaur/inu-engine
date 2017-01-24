@@ -1,7 +1,8 @@
 var test = require('tape')
+var pull = require('pull-stream')
+var html = require('yo-yo')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('initial state of model can be set in init', function (t) {
   var initialModel = {initial: true}
@@ -16,7 +17,7 @@ test('initial state of model can be set in init', function (t) {
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   inu.start(app)
@@ -36,7 +37,7 @@ test('returning an effect in init emits the effect on the effects stream', funct
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function () {}
   }
@@ -60,7 +61,7 @@ test('stateful sources pool last value', function (t) {
     },
     view: function (model, dispatch) {
       dispatch()
-      return inu.html`<div></div>`
+      return html`<div></div>`
     },
     run: function () {}
   }

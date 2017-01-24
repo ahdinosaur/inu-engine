@@ -1,7 +1,7 @@
 const href = require('sheet-router/href')
 const history = require('sheet-router/history')
 const Pushable = require('pull-pushable')
-const { html } = require('../')
+const html = require('yo-yo')
 
 /*
 const Router = require('sheet-router')

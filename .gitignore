@@ -3,3 +3,4 @@ npm-debug.log*
 /examples/bundle.js
 /assets/disc.html
 /coverage
+/.nyc_output

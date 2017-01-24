@@ -1,7 +1,8 @@
 var test = require('tape')
+var pull = require('pull-stream')
+var html = require('yo-yo')
 
 var inu = require('../')
-var pull = inu.pull
 
 test('Calling dispatch triggers update function with action passed to dispatch.', function (t) {
   var initialModel = {initial: true}
@@ -17,7 +18,7 @@ test('Calling dispatch triggers update function with action passed to dispatch.'
     },
     view: function (model, dispatch) {
       dispatch(expectedAction)
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   inu.start(app)
@@ -37,7 +38,7 @@ test('Delaying call to dispatch triggers update function with action passed to d
     },
     view: function (model, dispatch) {
       setTimeout(function () { dispatch(expectedAction) }, 10)
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   inu.start(app)
@@ -54,7 +55,7 @@ test('Calling dispatch emits actions on the action stream.', function (t) {
     },
     view: function (model, dispatch) {
       setTimeout(function () { dispatch(expectedAction) }, 10)
-      return inu.html`<div></div>`
+      return html`<div></div>`
     }
   }
   var sources = inu.start(app)

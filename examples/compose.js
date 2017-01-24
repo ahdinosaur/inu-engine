@@ -1,46 +1,47 @@
-const { html, pull } = require('../')
+const html = require('yo-yo')
+const pull = require('pull-stream')
 const many = require('pull-many')
 
-// apps as groupoid
+// engines as groupoid
 module.exports = compose
 
-function compose (apps, template = defaultTemplate) {
+function compose (engines, template = defaultTemplate) {
   return {
 
     init () {
       return composeStates(
-        apps.map((app) => app.init())
+        engines.map((engine) => engine.init())
       )
     },
 
     update (models, actions) {
       return composeStates(
-        apps.map((app, i) => {
+        engines.map((engine, i) => {
           const m = models[i]
           const a = actions[i]
-          return a ? app.update(m, a) : { model: m }
+          return a ? engine.update(m, a) : { model: m }
         })
       )
     },
 
     view (models, dispatch) {
-      const dispatchByApp = i =>
+      const dispatchByengine = i =>
         action => dispatch(item(action, i))
 
       return template(
-        apps.map((app, i) => {
+        engines.map((engine, i) => {
           const m = models[i]
-          return app.view(m, dispatchByApp(i))
+          return engine.view(m, dispatchByengine(i))
         })
       )
     },
 
     run (effects, sources) {
-      const nextActions = apps.map((app, i) => {
+      const nextActions = engines.map((engine, i) => {
         const eff = effects[i]
         return eff
           ? pull(
-              app.run(eff, {
+              engine.run(eff, {
                 actions: () => pull(
                   sources.actions(),
                   pull.map(value => value[i]),
@@ -70,7 +71,7 @@ function defaultTemplate (views) {
     <div>
     ${
       views.map((view, i) => html`
-        <div class=${`app-${i}`}>
+        <div class=${`engine-${i}`}>
           ${view}
         </div>`
       )
