@@ -30,7 +30,7 @@ test('infinite loop if sync dispatch, model always new, and effect needs to run 
       if (model) return dispatch('TICK')
       t.ok(false)
     },
-    run: function (effect) {
+    run: function (model, effect) {
       switch (effect) {
         case 'NEXT':
           const deferred = defer.source()
@@ -76,7 +76,7 @@ test('no infinite loop if async dispatch, model always new, and effect needs to 
       t.ok(true)
       t.end()
     },
-    run: function (effect) {
+    run: function (model, effect) {
       switch (effect) {
         case 'NEXT':
           const deferred = defer.source()

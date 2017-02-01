@@ -95,10 +95,19 @@ function start (app) {
     ) ? replayLastValue(listen) : listen
   })
 
+  // keep track of last model to pass into run function on next effect
+  var lastModel
+  pull(
+    models.listen(),
+    drain(function (model) {
+      lastModel = model
+    })
+  )
+
   pull(
     effects.listen(),
     map(function (effect) {
-      return run.call(app, effect, sources)
+      return run.call(app, lastModel, effect, sources)
     }),
     filter(isNotNil),
     drain(effectActionsSources)

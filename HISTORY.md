@@ -6,6 +6,7 @@ same as `inu@3`, but:
 
 - remove `html` and `pull` exports
 - rename "app" terminology to "engine"
+- change run function signature to `(model, effect, sources) => actions`
 
 # `inu@3.0.0` (23 June 2016)
 

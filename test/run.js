@@ -21,7 +21,7 @@ test('returning an effect from update triggers the run function', function (t) {
       dispatch()
       return html`<div></div>`
     },
-    run: function (effect) {
+    run: function (model, effect) {
       t.equal(effect, expectedEffect, 'effect is equivalent to effect object returned in update')
       t.end()
     }
@@ -45,7 +45,7 @@ test('returning an effect from init triggers the run function', function (t) {
       dispatch()
       return html`<div></div>`
     },
-    run: function (effect) {
+    run: function (model, effect) {
       t.equal(effect, expectedEffect, 'effect is equivalent to effect object returned in init')
       t.end()
     }
@@ -72,7 +72,7 @@ test('returning an action from effect triggers the update function', function (t
     view: function (model, dispatch) {
       return html`<div></div>`
     },
-    run: function (effect) {
+    run: function (model, effect) {
       return pull.values([expectedAction])
     }
   }
@@ -96,7 +96,7 @@ test('returning an action from effect emits actions on the action stream.', func
     view: function (model, dispatch) {
       return html`<div></div>`
     },
-    run: function (effect) {
+    run: function (model, effect) {
       return pull.values([expectedAction])
     }
   }
@@ -124,7 +124,7 @@ test('actions stream passed to run emits actions', function (t) {
     view: function (model, dispatch) {
       return html`<div></div>`
     },
-    run: function (effect, sources) {
+    run: function (model, effect, sources) {
       const actions = sources.actions
       pull(actions(), pull.take(1), pull.drain(function (action) {
         t.equal(action, expectedAction)
@@ -147,7 +147,7 @@ test('effectsAction stream will not emit an action if run returns an undefined s
       return {model: model}
     },
     view: function (model, dispatch) {},
-    run: function (effect) {
+    run: function (model, effect) {
       t.ok(effect)
     }
   }

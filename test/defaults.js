@@ -13,7 +13,7 @@ test('defaultInit', function (t) {
     view: function (model) {
       t.equal(model, expectedModel, 'init model is expected')
     },
-    run: function (effect) {
+    run: function (model, effect) {
       t.notOk(true, 'should not run effect')
     }
   })
@@ -27,7 +27,7 @@ test('defaultUpdate', function (t) {
   }
   var sources = inu.start({
     init: function () { return initialState },
-    run: function (effect) {
+    run: function (model, effect) {
       t.equal(effect, initialState.effect, 'effect received')
       return pull.values([
         'ACTION1', 'ACTION2', 'ACTION3'
