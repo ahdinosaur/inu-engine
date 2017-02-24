@@ -122,7 +122,7 @@ function start (app) {
     states(initialState)
   })
 
-  return Object.assign({}, sources, { stop: stop })
+  return Object.assign({}, sources, { stop: stop, dispatch: dispatch })
 
   function stop () {
     Object.keys(notifys).forEach(function (name) {
