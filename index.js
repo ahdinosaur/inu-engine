@@ -1,43 +1,62 @@
-const { keys } = Object
-const Store = require('inu')
+const { keys, assign } = Object
+const Value = require('mutant/value')
 const Watch = require('mutant/watch')
 
+module.exports = Engine
 
-var watch = Store(function (state, action, { emit, watch }) {
-  console.log('state is', state) // state while action is being emitted
-  console.log('action is', action) // action being emitted
-  console.log('emit is:', emit) // function to emit actions
-  console.log('watch is:', watch) // object of functions to watch inu observables
-})
+function Engine (options = {}) {
+  const {
+    state: initialState,
+    action: initialAction,
+    update: updateHandler = identity,
+    view: viewHandler = noop
+  } = options
 
-function Store (update = identity) {
+  const obs = {
+    state: Value(),
+    action: Value()
+  }
+  const emit = obs.action.set
 
-  const state = Value()
-  const action = Value()
-  const view = computed(([state, action]) => {
-    nextState = update(state, action, store)
-    if (nextState !== undefined) state.set(nextState)
-  })
-
-  const obs = { state, view, action }
   const watch = keys(obs).reduce((sofar, key) => {
     sofar[key] = Watcher(obs[key])
     return sofar
   }, {})
 
-  const store = { emit, watch }
+  const end = obs.action(action => {
+    const state = obs.state()
+    const next = updateHandler(state, action, watch)
+    if (isUndefined(next)) return
+    else if (isObserv(next)) next(emit)
+    else if (next !== state) obs.state.set(next)
+  })
 
-  return store
+  if (!isUndefined(initialState)) obs.state.set(initialState)
+  if (!isUndefined(initialAction)) obs.action.set(initialAction)
 
-  function emit (action) {
-    action.set(action)
-  }
+  const view = viewHandler(obs.state, emit)
+
+  return assign({ emit, view, end }, watch)
 }
 
 function Watcher (obs) {
   return listener => Watch(obs, listener)
 }
 
+function isObserv (value) {
+  return isFunction(value)
+}
+
+function isFunction (value) {
+  return typeof value === 'function'
+}
+ 
+function isUndefined (value) {
+  return typeof value === 'undefined'
+}
+
 function identity (value) {
   return value
 }
+
+function noop () {}

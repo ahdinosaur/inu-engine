@@ -1,25 +1,21 @@
-const start = require('../')
-const html = require('yo-yo')
-const pull = require('pull-stream')
+global.setImmediate = require('set-immediate-shim')  
 
-const compose = require('./compose')
+const Engine = require('../')
+//const pull = require('pull-stream')
+
+//const compose = require('./compose')
 
 const main = document.querySelector('.main')
 
-const engines = [
-  require('./title'),
-  require('./counter'),
-  require('./routing'),
+const apps = [
+//  require('./title'),
+//  require('./counter'),
+//  require('./routing'),
   require('./clock')
 ]
 
-const engine = compose(engines)
+//const app = compose(apps)
 
-const sources = start(engine)
+const engine = Engine(apps[0])
 
-pull(
-  sources.views(),
-  pull.drain(function (view) {
-    html.update(main, view)
-  })
-)
+document.body.appendChild(engine.view)
