@@ -22,13 +22,19 @@ module.exports = {
     }
   },
 
-  view: (model, dispatch) => html`
-    <div class='clock'>
-      Seconds Elapsed: ${model}
-    </div>
-  `,
+  view: (model, dispatch) => {
+    return html`
+      <div class='clock'>
+        Seconds Elapsed: ${d()}
+      </div>
+    `
+    function d () {
+      dispatch('SCHEDULE_TICK')
+      return model
+    }
+  },
 
-  run: (effect) => {
+  run: (lastModel, effect) => {
     switch (effect) {
       case 'SCHEDULE_TICK':
         return pull(
