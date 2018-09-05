@@ -100,13 +100,19 @@ const engine = {
     }
   },
 
-  view: (model, dispatch) => html`
-    <div class='clock'>
-      Seconds Elapsed: ${model}
-    </div>
-  `,
+  view: (model, dispatch) => {
+    return html`
+      <div class='clock'>
+        Seconds Elapsed: ${d()}
+      </div>
+    `
+    function d () {
+      dispatch('SCHEDULE_TICK')
+      return model
+    }
+  }
 
-  run: (effect, sources) => {
+  run: (lastModel, effect, sources) => {
     switch (effect) {
       case 'SCHEDULE_TICK':
         return pull(
@@ -140,7 +146,7 @@ var initState = {
     todos: [{
       text: 'Eat food',
       completed: true
-    }, { 
+    }, {
       text: 'Exercise',
       completed: false
     }],
@@ -244,7 +250,7 @@ function appView (model, dispatch) {
       ${model.todos.map((todo, index) => html`
         <div class='todo'>
           ${todo.text}
-          <button onclick=${toggleTodo(index)}
+          <button onclick=${toggleTodo(index)}></button>
         </div>
       `)}
     </div>
